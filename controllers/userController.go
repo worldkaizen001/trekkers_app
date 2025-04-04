@@ -5,7 +5,10 @@ import (
 	// "main/models"
 
 	"fmt"
+	"main/initializers"
 	"main/models"
+	"main/utils"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -27,7 +30,7 @@ func CreateUser (c *gin.Context) {
 	}
 
 	newUser:= models.User{Name: users.Name, Email: users.Email}
-	result := DBB.Create(&newUser)
+	result := initializers.DB.Create(&newUser)
 	if result.Error != nil {
 		fmt.Println("error occured inserting into DB")
 		return
@@ -38,3 +41,21 @@ func CreateUser (c *gin.Context) {
 	
 }
 
+func Register(c *gin.Context) {
+    var user models.User
+    if err := c.ShouldBindJSON(&user); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+
+    // Hash the password before storing
+    hashedPassword, _ := utils.HashPassword(user.Password)
+    user.Password = hashedPassword
+
+    if err := initializers.DB.Create(&user).Error; err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": "User could not be created"})
+        return
+    }
+
+    c.JSON(http.StatusOK, gin.H{"message": "User registered successfully"})
+}

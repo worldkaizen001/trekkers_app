@@ -6,6 +6,7 @@ type User struct {
 	gorm.Model
 	Name string `json:"name"`
 	Email string `json:"email"`
+	Password string `json:"password"`
 	Profile Profile `gorm:"foreignKey:id"`
 	Steps []Step `gorm:"foreignKey:id"`
 
