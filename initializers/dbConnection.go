@@ -14,12 +14,12 @@ func ConnectDb() {
 	dsn := fmt.Sprintf("host=localhost user=postgres password=kellyakacj dbname=trekkers port=5432")
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-	fmt.Println("Connection to DB was Successful🎉"+ db.Name())
+	fmt.Println("Connection to DB was Successful🎉" + db.Name())
 	if err != nil {
 		panic("Failed to connect to the database!")
 	}
 
-	db.AutoMigrate(&models.User{}, &models.Profile{}, &models.Step{})
+	db.AutoMigrate(&models.User{}, &models.Profile{}, &models.Step{}, &models.Invite{})
 	DB = db
 
 }

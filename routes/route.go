@@ -14,6 +14,8 @@ func InitiaRoute() *gin.Engine{
 	r.POST("users/search", controllers.SearchUserByName)
 	r.DELETE("users/:id", controllers.DeletedUserById)
 	r.PUT("users/:id", controllers.UpdateUser)
+	r.GET("/test", controllers.Test)
+
 	
 
 	

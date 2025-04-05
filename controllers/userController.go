@@ -70,6 +70,20 @@ type UserResponseDTO struct {
 	// Steps   []models.Step   `json:"steps"`
 	// Password string `json:"password"`
 }
+func Test(c *gin.Context){
+// 	var user []models.User
+// err :=	initializers.DB.Find(&user).Error;
+// if err != nil {
+// 	c.JSON(http.StatusBadRequest, gin.H{"error": "Error getting users"});
+// 	return
+// }
+
+
+c.JSON(http.StatusOK, gin.H{
+	"success": "We are lively",
+	
+})
+}
 func GetAllUsers(c *gin.Context){
 	var user []models.User
 err :=	initializers.DB.Find(&user).Error;

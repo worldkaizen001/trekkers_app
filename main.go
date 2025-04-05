@@ -14,14 +14,13 @@ func init() {
 }
 
 func main() {
-    r:=routes.InitiaRoute()
+	r := routes.InitiaRoute()
 	// Register root route
 	r.GET("/", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{"mesage": "We are live"})
+		ctx.JSON(http.StatusOK, gin.H{"mesage": "We are live40"})
 	})
 
 	// Setup other routes before starting the server
-	
 
 	fmt.Println("🚀 Server running on port: 8000")
 	fmt.Println("Server running speedily🍀")
