@@ -4,11 +4,13 @@ import (
 	// "fmt"
 	// "main/models"
 
+	"context"
 	"fmt"
 	"main/initializers"
 	"main/models"
 	"main/utils"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	// "main/initializers"
@@ -83,6 +85,19 @@ c.JSON(http.StatusOK, gin.H{
 	"success": "We are lively",
 	
 })
+}
+
+func getUserProfile(ctx context.Context, userID string)  {
+    // Set 3-second timeout for the DB query
+    ctx, cancel := context.WithTimeout(ctx, 3*time.Second)
+    defer cancel()
+    
+  
+    // err := db.QueryRowContext(ctx, "SELECT * FROM users WHERE id = ?", userID).Scan(&profile)
+    // if err != nil {
+    //     return nil, fmt.Errorf("failed to get user profile: %w", err)
+    // }
+  
 }
 func GetAllUsers(c *gin.Context){
 	var user []models.User
